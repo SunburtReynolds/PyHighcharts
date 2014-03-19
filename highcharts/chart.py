@@ -175,29 +175,29 @@ def chart_formatter(option_type, data):
     if option_type in special_cases:
         tmp += special_cases[option_type](data)
     elif option_type == "yAxis" and data.get('axis'):
-        tmp += "[{\n"
+        tmp += "[{"
         for i, ax in enumerate(data['axis'], 1):
             tmp += update_template("", 'multiaxis', ax, tab_depth=1)
             if not i == len(data['axis']):
-                tmp += "\t},{\n"
-        tmp += "\t}]"
+                tmp += "},{"
+        tmp += "}]"
         print tmp
     else:
-        tmp += "{\n" 
+        tmp += "{" 
         for key, val in data.items():
             if isinstance(val, dict):
-                tmp += "\t%s: {\n" % key
+                tmp += "%s: {" % key
                 for subkey, subval in val.items():
                     tmp = update_template(tmp, subkey, subval, tab_depth=3)
-                tmp += "\t\t" + "},\n"
+                tmp += + "},"
             elif isinstance(val, SeriesOptions):
-                tmp += "\t%s: {\n" % key
+                tmp += "%s: {" % key
                 for subkey, subval in val.__dict__.items():
                     tmp = update_template(tmp, subkey, subval, tab_depth=3)
-                tmp += "\t\t" + "},\n"
+                tmp += + "},"
             else:
                 tmp = update_template(tmp, key, val, tab_depth=2)
-        tmp += "\t}"
+        tmp += "}"
     return tmp
 
 
