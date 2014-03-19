@@ -18,19 +18,19 @@ from _abcoll import Iterable
 
 class QueriedData:
     'Class to encompass the transition from database queries to Json dictionaries.'
-    #isDefault = "true"
+    # isDefault = "true"
     jsonDict = {}
+    organizedData = []
        
-    def __init__(self, queriedData, numSeries, chartType = "column", **kwargs): #insert other arguments
+    def __init__(self, queriedData, numSeries, **kwargs): #insert other arguments
         'Constructor. **kwargs will be a dictionary of specified chart options'
                         
         self.queriedData = queriedData
-        self.chartType = chartType
         self.numSeries = numSeries
         
-        #debug code to show the **kwargs (chart options)
+        # debug code to show the **kwargs (chart options)
         if kwargs is not None:
-            #indicate that we are not using the default format (ie we are specifying chart options)
+            # indicate that we are not using the default format (ie we are specifying chart options)
             self.isDefault = false
             
             for key, value in kwargs.iteritems():
@@ -40,20 +40,21 @@ class QueriedData:
     def creatDict(self): #insert other arguments
         'Create a Json dictionary incorporating queried data and the Highcharts functions.'
         
-        #based on how many series of data (ie columns in the 2-D array) there are, create an appropriate number of lists
+        # organize 2-D list into a 1-D list
+        orgDataIndex = 0
+        for col in queriedData:
+            for row in queriedData: # this may be inverted order to organize by
+                organizedData[orgDataIndex].add(queriedData[row][col])
         
         
-        #insert for loops that will parse 2-D list into 1-D list (based on number of 1-D lists required)
+        # create chart object--set appropriate chart options using the Highcharts functions (ie add_data_set) based on what options were passed to QueriedData constructor
         
         
-        #create chart object--set appropriate chart options using the Highcharts functions (ie add_data_set) based on what options were passed to QueriedData constructor
-        
-        
-        #Using chart.__export_options__(), create a Json dictionary (member variable)
+        # Using chart.__export_options__(), create a Json dictionary (member variable)
         
         
     def exportDict(self): #insert other arguments
         'Send the dictionary to the appropriate location to be displayed on the web. Could be implemented using PyHighcharts.highcharts.charts.show()'
         
-        #self-explanatory
+        # self-explanatory
         
